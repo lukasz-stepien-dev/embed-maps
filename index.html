@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mapa z niestandardowym markerem</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+
+<script>
+    // Funkcja inicjująca mapę
+    function initMap() {
+        // Współrzędne lokalizacji
+        var myLatLng = { lat: 51.74083812361785, lng: 19.452764971628074 };
+
+        // Tworzenie mapy
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: myLatLng,
+            zoom: 15, // Poziom przybliżenia
+            minZoom: 10,
+            streetViewControl: false,
+            fullscreenControl: false
+        });
+
+        // Tworzenie niestandardowego markera
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'Mój niestandardowy marker',
+            icon: 'log_zsp_100.png'
+        });
+
+        var infowindow = new google.maps.InfoWindow({
+            content: '<h1>Kochane ZSP9 wita was!</h1><p>Pamietajcie uczniowie! <b>NIE MA OPIERDALANIA SIE!!!!!!</b></p>'
+        });
+
+        marker.addListener('click', function() {
+            infowindow.open(map, marker);
+        });
+    }
+</script>
+
+<!-- Dołączanie Google Maps API z kluczem (zastąp 'YOUR_API_KEY' swoim kluczem) -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArOqv9NG801HCf95yDLXh-YD0mxpASzhA&callback=initMap" async defer></script>
+</body>
+</html>
